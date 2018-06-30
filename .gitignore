@@ -1,7 +1,13 @@
-# Windows thumbnail cache files
+# Windows image file caches
 Thumbs.db
 ehthumbs.db
-ehthumbs_vista.db
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bject/
+[Oo]bjects/
+Assets/
+Assets/AssetStoreTools*
 
 # Folder config file
 Desktop.ini
@@ -21,3 +27,36 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.cache
+.vs/BattleshipConsole/v15/Server/sqlite3/db.lock
+*.ide
+.vs/BattleshipConsole/v15/Server/sqlite3/storage.ide-shm
+*.ide-wal
+App.config
+*.csproj
+BattleshipConsole.sln
