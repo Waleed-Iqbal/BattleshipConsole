@@ -14,12 +14,16 @@ namespace BattleshipConsole
         public const int NUMBER_OF_DESTROYERS = 2;
         public const int NUMBER_OF_BATTLESHIPS = 1;
 
-        public const string COMPUTER_STRING = "COMPUTER";
         public const string HUMAN_STRING = "YOU";
+        public const string COMPUTER_STRING = "OPPONENT";
         public const string HIT_MISSED = "Hit Missed";
         public const string HIT_SUCCESSFUL = "Hit Successful";
         public const string DESTROYER_STRING = "Destroyer";
         public const string BATTLESHIP_STRING = "Battleship";
         public const string LEGENT_STRING = "LEGEND";
+        public const string HUMAN_NAME = "You";
+        public const string COMPUTER_NAME = "Opponent";
+        public const string INVALID_INPUT = "Invalid input";
+        public const string TRY_AGAIN = "Try again";
     }
 }

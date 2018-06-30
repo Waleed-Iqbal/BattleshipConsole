@@ -10,8 +10,8 @@ namespace BattleshipConsole
     {
         string[,] Grid;
 
-        readonly char[] Rows = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-        readonly char[] Columns = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
+        public readonly char[] Rows = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        public readonly char[] Columns = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
 
         public int NumberOfShipsRemaining;
 

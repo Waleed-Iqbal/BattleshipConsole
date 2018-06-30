@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace BattleshipConsole
 {
-    class HumanPlayer
+    public class HumanPlayer : Player
     {
+        public HumanPlayer()
+        {
+            Name = Constants.HUMAN_NAME;
+        }
     }
 }
