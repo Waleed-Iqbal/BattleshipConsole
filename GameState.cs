@@ -8,6 +8,7 @@ namespace BattleshipConsole
 {
     public class GameState
     {
-
+        Board HumanPlayerBoard = new Board();
+        Board ComputerPlayerBoard = new Board();
     }
 }
