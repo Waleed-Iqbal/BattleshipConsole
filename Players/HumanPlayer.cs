@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleshipConsole
 {
-    class Computer
+    class HumanPlayer
     {
     }
 }

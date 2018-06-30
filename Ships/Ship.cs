@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace BattleshipConsole
 {
-
-
-    public class GameState
+    public class Ship
     {
-        Board HumanPlayerBoard = new Board();
-        Board ComputerPlayerBoard = new Board();
+        public int Size { get; set; }
+        public bool IsDestroyed { get; set; }
 
-        public void Initialize()
+        enum Orientation
         {
-
+            Horizontal,
+            Vertical
         }
     }
 }
