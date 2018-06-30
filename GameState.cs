@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 namespace BattleshipConsole
 {
 
-
     public class GameState
     {
-        Board HumanPlayerBoard = new Board();
-        Board ComputerPlayerBoard = new Board();
+        public Board HumanPlayerBoard = new Board();
+        public Board ComputerPlayerBoard = new Board();
+
+        public bool IsGameOver;
 
         public void Initialize()
         {

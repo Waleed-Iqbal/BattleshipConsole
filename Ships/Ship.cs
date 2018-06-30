@@ -11,10 +11,16 @@ namespace BattleshipConsole
         public int Size { get; set; }
         public bool IsDestroyed { get; set; }
 
-        enum Orientation
+        public Orientations Orientation;
+        public enum Orientations
         {
             Horizontal,
             Vertical
+        }
+
+        public Ship()
+        {
+            Orientation = Orientations.Horizontal;
         }
     }
 }

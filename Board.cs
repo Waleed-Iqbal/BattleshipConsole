@@ -9,24 +9,29 @@ namespace BattleshipConsole
     public class Board
     {
         string[,] Grid;
+
         readonly char[] Rows = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         readonly char[] Columns = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I' };
 
+        public int NumberOfShipsRemaining;
+
         public Board()
         {
-            Grid = new string[10, 10];
+            NumberOfShipsRemaining = Constants.NUMBER_OF_BATTLESHIPS + Constants.NUMBER_OF_DESTROYERS;
 
-            for (int column = 0; column < Columns.Length; ++column)
-                for (int row = 0; row < Rows.Length; ++row)
+            Grid = new string[Constants.BOARD_ROWS_COUNT, Constants.BOARD_COLUMNS_COUNT];
+
+            for (int column = 0; column < Constants.BOARD_ROWS_COUNT; ++column)
+                for (int row = 0; row < Constants.BOARD_COLUMNS_COUNT; ++row)
                     Grid[column, row] = Columns[column].ToString() + Rows[row].ToString();
         }
 
         public void DisplayBoard()
         {
-            for (int row = 0; row < Rows.Length; ++row)
+            for (int row = 0; row < Constants.BOARD_ROWS_COUNT; ++row)
             {
                 Console.WriteLine();
-                for (int column = 0; column < Columns.Length; ++column)
+                for (int column = 0; column < Constants.BOARD_COLUMNS_COUNT; ++column)
                     Console.Write(Grid[column, row] + " ");
             }
         }

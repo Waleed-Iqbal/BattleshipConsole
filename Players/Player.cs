@@ -8,5 +8,7 @@ namespace BattleshipConsole
 {
     public class Player
     {
+        public bool IsCurrentTurn;
+        public bool IsWinner;
     }
 }
