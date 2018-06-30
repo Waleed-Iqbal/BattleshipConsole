@@ -25,5 +25,11 @@ namespace BattleshipConsole
         public const string COMPUTER_NAME = "Opponent";
         public const string INVALID_INPUT = "Invalid input";
         public const string TRY_AGAIN = "Try again";
+        public const string PLACE_DESTROYER = "Place destroyer (5 cells)";
+        public const string PLACE_BATTLESHIP = "Place battleship (5 cells)";
+        public const string VETICAL = "Vertical";
+        public const string HORIZONTAL = "Horizontal";
+
+
     }
 }

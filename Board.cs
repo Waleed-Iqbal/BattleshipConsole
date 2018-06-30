@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattleshipConsole.Ships;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +9,20 @@ namespace BattleshipConsole
 {
     public class Board
     {
-        string[,] Grid;
+        string[,] Grid { get; set; }
 
         public readonly char[] Rows = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         public readonly char[] Columns = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
 
-        public int NumberOfShipsRemaining;
+        public int NumberOfShips { get; set; }
+
+        public Destroyer Destroyer1 { get; set; }
+        public Destroyer Destroyer2 { get; set; }
+        public Battleship Battleship { get; set; }
 
         public Board()
         {
-            NumberOfShipsRemaining = Constants.NUMBER_OF_BATTLESHIPS + Constants.NUMBER_OF_DESTROYERS;
+            NumberOfShips = Constants.NUMBER_OF_BATTLESHIPS + Constants.NUMBER_OF_DESTROYERS;
 
             Grid = new string[Constants.BOARD_ROWS_COUNT, Constants.BOARD_COLUMNS_COUNT];
 
@@ -25,23 +30,33 @@ namespace BattleshipConsole
                 for (int row = 0; row < Constants.BOARD_COLUMNS_COUNT; ++row)
                     Grid[column, row] = Columns[column].ToString() + Rows[row].ToString();
         }
-         
-        public void DisplayBoard()
+
+        // this should set all the data of the ships and here the ships will be rendered
+        public void PlaceAllShips()
         {
-
-            Console.Write($"{Environment.NewLine}    ");
-            foreach (char c in Columns)
-                Console.Write($" {c} ");
-
-            Console.WriteLine();
-
-            for (int row = 0; row < Constants.BOARD_ROWS_COUNT; ++row)
-            {
-                Console.WriteLine();
-                Console.Write($" {Rows[row]}   ");
-                for (int column = 0; column < Constants.BOARD_COLUMNS_COUNT; ++column)
-                    Console.Write($"{Grid[column, row]} ");
-            }
+            Destroyer1.Place();
+            Destroyer2.Place();
+            Battleship.Place();
         }
+
+        //public void DisplayBoard()
+        //{
+        //    PlaceAllShips();
+
+
+        //    Console.Write($"{Environment.NewLine}    ");
+        //    foreach (char c in Columns)
+        //        Console.Write($" {c} ");
+
+        //    Console.WriteLine();
+
+        //    for (int row = 0; row < Constants.BOARD_ROWS_COUNT; ++row)
+        //    {
+        //        Console.WriteLine();
+        //        Console.Write($" {Rows[row]}   ");
+        //        for (int column = 0; column < Constants.BOARD_COLUMNS_COUNT; ++column)
+        //            Console.Write($"{Grid[column, row]} ");
+        //    }
+        //}
     }
 }

@@ -9,42 +9,37 @@ namespace BattleshipConsole
 
     public class GameState
     {
-        public Board HumanPlayerBoard;
-        public Board ComputerPlayerBoard;
+        //public Board HumanPlayerBoard { get; set; }
+        //public Board ComputerPlayerBoard { get; set; }
 
-        public ComputerPlayer Computer;
-        public HumanPlayer Human;
+        public ComputerPlayer Computer { get; set; }
+        public HumanPlayer Human { get; set; }
 
-        public bool IsGameOver;
-        public bool IsHumanTurn;
-        public bool IsInputValid;
-
-        public List<string> HitsLocationsSoFar;
-
-        public StringBuilder GameHistory;
+        public bool IsGameOver { get; set; }
+        public bool IsHumanTurn { get; set; }
+        public bool IsInputValid { get; set; }
+        public bool IsShipPlacementComplete { get; set; }
 
         public GameState()
         {
-            HumanPlayerBoard = new Board();
-            ComputerPlayerBoard = new Board();
-
             Computer = new ComputerPlayer();
             Human = new HumanPlayer();
 
             IsHumanTurn = false; // will be turned to true at the start of game loop
             IsGameOver = false;
+            IsShipPlacementComplete = false;
 
-            HitsLocationsSoFar = new List<string>();
-            GameHistory = new StringBuilder("");
         }
 
-        public void ShowBoards()
+        public void DisplayBoards()
         {
             Console.WriteLine($"{Environment.NewLine}\t {Constants.HUMAN_STRING}");
-            HumanPlayerBoard.DisplayBoard();
+            Human.Board.PlaceAllShips();
+            Human.DisplayBoard();
 
             Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}\t {Constants.COMPUTER_STRING}");
-            ComputerPlayerBoard.DisplayBoard();
+            Computer.Board.PlaceAllShips();
+            Computer.DisplayBoard();
 
             Console.WriteLine($"\t{Environment.NewLine}{Environment.NewLine}{Constants.LEGENT_STRING}: {Environment.NewLine}" +
                $"DE: {Constants.DESTROYER_STRING},  BS: {Constants.BATTLESHIP_STRING},  HM: {Constants.HIT_MISSED},  HS: {Constants.HIT_SUCCESSFUL}");
@@ -54,22 +49,26 @@ namespace BattleshipConsole
         public bool ValidateInput(Input input)
         {
             bool isInputValid = true;
-            isInputValid = HumanPlayerBoard.Rows.Contains(Char.ToUpper(input.Row)) && HumanPlayerBoard.Columns.Contains(input.Column);
+            isInputValid = Human.Board.Rows.Contains(Char.ToUpper(input.Row)) && Computer.Board.Columns.Contains(input.Column);
             return isInputValid;
         }
 
         public void Start()
         {
-            ShowBoards();
+            Console.Clear();
+            DisplayBoards();
+
+            //Human.PlaceShips();
+            //Computer.PlaceShips();
+
             while (!IsGameOver)
             {
                 IsHumanTurn = !IsHumanTurn;
                 Human.IsCurrentTurn = IsHumanTurn;
                 Computer.IsCurrentTurn = !IsHumanTurn;
 
-                Player currentPlayer = IsHumanTurn ? (Player)Human : (Player)Computer;
-
-                GameHistory.Append("${currentPlayer.Name}: ");
+                Player currentPlayer = new Player();
+                currentPlayer = IsHumanTurn ? (Player)Human : (Player)Computer;
 
                 Console.Write($"{Environment.NewLine} {currentPlayer.Name}: ");
 

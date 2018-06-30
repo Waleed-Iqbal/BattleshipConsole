@@ -11,10 +11,7 @@ namespace BattleshipConsole
         static void Main(string[] args)
         {
             GameState Game = new GameState();
-
             Game.Start();
-
-           
 
 
             Console.WriteLine(Environment.NewLine);

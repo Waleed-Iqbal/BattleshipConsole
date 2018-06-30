@@ -15,12 +15,19 @@ namespace BattleshipConsole
     public class Player
     {
         public string Name { get; set; }
-        public bool IsCurrentTurn;
-        public bool IsWinner;
+        public bool IsCurrentTurn { get; set; }
+        public bool IsWinner { get; set; }
         public Input Input;
+        public Board Board;
+
+
+        public virtual void PlaceShips()
+        {
+        }
 
         public Player()
         {
+            Board = new Board();
             Input.Row = ' ';
             Input.Column = ' ';
         }
