@@ -13,7 +13,6 @@ namespace BattleshipConsole.Ships
             Size = 4;
         }
 
-
         /// <summary>
         /// Will be used to place first destroyer/ship
         /// </summary>
@@ -22,7 +21,7 @@ namespace BattleshipConsole.Ships
             bool isOrientationValid = false;
             while (!isOrientationValid)
             {
-                Console.WriteLine($"{Environment.NewLine} {Constants.PLACE_DESTROYER}:");
+                Console.WriteLine($"{Environment.NewLine}{Environment.NewLine} {Constants.PLACE_DESTROYER}:");
                 Console.Write(GetOrientationText());
 
                 char orientation = Console.ReadKey().KeyChar;
@@ -57,12 +56,12 @@ namespace BattleshipConsole.Ships
             }
 
 
-            if(isStartPositionValid && isEndPositionValid)
+            if (isStartPositionValid && isEndPositionValid)
             {
                 Point startPoint = new Point() { Row = Array.IndexOf(rows, StartPosition.Row), Column = Array.IndexOf(columns, StartPosition.Column) };
                 Point endPoint = new Point() { Row = Array.IndexOf(rows, EndPosition.Row), Column = Array.IndexOf(columns, EndPosition.Column) };
 
-                if(Orientation == Orientations.Vertical)
+                if (Orientation == Orientations.Vertical)
                 {
                     if (startPoint.Row - endPoint.Row < 0)
                         for (var i = startPoint.Row; i <= endPoint.Row; i++)

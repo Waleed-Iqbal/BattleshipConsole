@@ -72,7 +72,7 @@ namespace BattleshipConsole
             {
                 int rowIndex = Array.IndexOf(rows, position.Row);
                 int columnIndex = Array.IndexOf(columns, position.Column);
-                string candidateCellContents = grid[rowIndex, columnIndex];
+                string candidateCellContents = grid[columnIndex, rowIndex];
 
                 isValid = !(candidateCellContents == Constants.LEGEND_BATTLESHIP || candidateCellContents == Constants.LEGEND_DESTROYER);
             }

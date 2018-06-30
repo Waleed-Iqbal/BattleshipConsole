@@ -21,7 +21,7 @@ namespace BattleshipConsole.Ships
             bool isOrientationValid = false;
             while (!isOrientationValid)
             {
-                Console.WriteLine($"{Environment.NewLine} {Constants.PLACE_BATTLESHIP}:");
+                Console.WriteLine($"{Environment.NewLine}{Environment.NewLine} {Constants.PLACE_BATTLESHIP}:");
                 Console.Write(GetOrientationText());
 
                 char orientation = Console.ReadKey().KeyChar;

@@ -41,9 +41,7 @@ namespace BattleshipConsole
         public void PlaceAllShips()
         {
             Destroyer1.Place(Rows, Columns, Grid);
-            DisplayBoard();
             Destroyer2.Place(Rows, Columns, Grid);
-            DisplayBoard();
             Battleship.Place(Rows, Columns, Grid);
         }
 
