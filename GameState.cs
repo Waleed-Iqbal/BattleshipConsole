@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace BattleshipConsole
 {
-    class Program
+    public class GameState
     {
-        static void Main(string[] args)
-        {
-            Board board = new Board();
 
-            board.DisplayBoard();
-        }
     }
 }

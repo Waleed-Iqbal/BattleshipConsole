@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleshipConsole
 {
-    class Program
+    class Player
     {
-        static void Main(string[] args)
-        {
-            Board board = new Board();
-
-            board.DisplayBoard();
-        }
     }
 }
