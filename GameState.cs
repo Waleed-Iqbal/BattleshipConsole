@@ -43,7 +43,7 @@ namespace BattleshipConsole
             Console.WriteLine($"{Environment.NewLine}\t {Constants.HUMAN_STRING}");
             HumanPlayerBoard.DisplayBoard();
 
-            Console.WriteLine($"{Environment.NewLine}\t {Constants.COMPUTER_STRING}");
+            Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}\t {Constants.COMPUTER_STRING}");
             ComputerPlayerBoard.DisplayBoard();
 
             Console.WriteLine($"\t{Environment.NewLine}{Environment.NewLine}{Constants.LEGENT_STRING}: {Environment.NewLine}" +

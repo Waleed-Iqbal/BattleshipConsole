@@ -28,10 +28,17 @@ namespace BattleshipConsole
          
         public void DisplayBoard()
         {
+
+            Console.Write($"{Environment.NewLine}    ");
+            foreach (char c in Columns)
+                Console.Write($" {c} ");
+
+            Console.WriteLine();
+
             for (int row = 0; row < Constants.BOARD_ROWS_COUNT; ++row)
             {
                 Console.WriteLine();
-                Console.Write(" ");
+                Console.Write($" {Rows[row]}   ");
                 for (int column = 0; column < Constants.BOARD_COLUMNS_COUNT; ++column)
                     Console.Write($"{Grid[column, row]} ");
             }
