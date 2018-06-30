@@ -26,6 +26,9 @@ namespace BattleshipConsole
         public Board()
         {
             NumberOfShips = Constants.NUMBER_OF_BATTLESHIPS + Constants.NUMBER_OF_DESTROYERS;
+            Destroyer1 = new Destroyer();
+            Destroyer2 = new Destroyer();
+            Battleship = new Battleship();
 
             Grid = new string[Constants.BOARD_ROWS_COUNT, Constants.BOARD_COLUMNS_COUNT];
 
@@ -37,29 +40,28 @@ namespace BattleshipConsole
         // this should set all the data of the ships and here the ships will be rendered
         public void PlaceAllShips()
         {
-            Destroyer1.Place(Rows, Columns, ValidRows, ValidColumns, Grid);
-            Destroyer2.Place(Rows, Columns, ValidRows, ValidColumns, Grid);
-            Battleship.Place(Rows, Columns, ValidRows, ValidColumns, Grid);
+            Destroyer1.Place(Rows, Columns, Grid);
+            DisplayBoard();
+            Destroyer2.Place(Rows, Columns, Grid);
+            DisplayBoard();
+            Battleship.Place(Rows, Columns, Grid);
         }
 
-        //public void DisplayBoard()
-        //{
-        //    PlaceAllShips();
+        public void DisplayBoard()
+        {
+            Console.Write($"{Environment.NewLine}    ");
+            foreach (char c in Columns)
+                Console.Write($" {c} ");
 
+            Console.WriteLine();
 
-        //    Console.Write($"{Environment.NewLine}    ");
-        //    foreach (char c in Columns)
-        //        Console.Write($" {c} ");
-
-        //    Console.WriteLine();
-
-        //    for (int row = 0; row < Constants.BOARD_ROWS_COUNT; ++row)
-        //    {
-        //        Console.WriteLine();
-        //        Console.Write($" {Rows[row]}   ");
-        //        for (int column = 0; column < Constants.BOARD_COLUMNS_COUNT; ++column)
-        //            Console.Write($"{Grid[column, row]} ");
-        //    }
-        //}
+            for (int row = 0; row < Constants.BOARD_ROWS_COUNT; ++row)
+            {
+                Console.WriteLine();
+                Console.Write($" {Rows[row]}   ");
+                for (int column = 0; column < Constants.BOARD_COLUMNS_COUNT; ++column)
+                    Console.Write($"{Grid[column, row]} ");
+            }
+        }
     }
 }

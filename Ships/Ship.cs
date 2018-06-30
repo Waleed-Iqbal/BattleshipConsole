@@ -12,14 +12,20 @@ namespace BattleshipConsole
         public char Column;
     };
 
+    public struct Point
+    {
+        public int Row;
+        public int Column;
+    }
+
     public class Ship
     {
         public int Size { get; set; }
         public bool IsDestroyed { get; set; }
-        public Position EndPosition { get; set; }
         public Orientations Orientation { get; set; }
 
         public Position StartPosition;
+        public Position EndPosition;
 
         public Ship()
         {
@@ -28,8 +34,8 @@ namespace BattleshipConsole
 
         public enum Orientations
         {
-            Horizontal,
-            Vertical
+            Vertical,
+            Horizontal
         }
 
         public bool ValidateOrientation(char orientation)
@@ -38,9 +44,9 @@ namespace BattleshipConsole
         }
 
 
-        public virtual void Place(char[] rows, char[] columns, char[] validRows, char[] validColumns, string[,] Grid)
-        {
 
+        public virtual void Place(char[] rows, char[] columns, string[,] grid)
+        {
         }
 
 
@@ -50,22 +56,52 @@ namespace BattleshipConsole
         }
 
 
-        public void GetOrientationText()
+        public string GetOrientationText()
         {
-            Console.Write($"{Environment.NewLine} Set Orientation (enter 1 or 2): {Environment.NewLine} " +
-                $"1. {Constants.VETICAL} {Environment.NewLine}" +
-                $"2. {Constants.HORIZONTAL} {Environment.NewLine}" +
-                $"==> ");
+            return $"{Environment.NewLine} Set Orientation (enter 1 or 2): {Environment.NewLine} " +
+                $"1. {Constants.HORIZONTAL } {Environment.NewLine} " +
+                $"2. {Constants.VETICAL} {Environment.NewLine} " +
+                $"==> ";
         }
 
-        public virtual bool ValidateStartPosition(Position position, char[] rows, char[] columns, string[,] grid)
+        public bool ValidateStartPosition(Position position, char[] rows, char[] columns, string[,] grid)
         {
-            return false;
+            bool isValid = false;
+            isValid = rows.Contains(position.Row) && columns.Contains(position.Column);
+            if (isValid)
+            {
+                int rowIndex = Array.IndexOf(rows, position.Row);
+                int columnIndex = Array.IndexOf(columns, position.Column);
+                string candidateCellContents = grid[rowIndex, columnIndex];
+
+                isValid = !(candidateCellContents == Constants.LEGEND_BATTLESHIP || candidateCellContents == Constants.LEGEND_DESTROYER);
+            }
+            return isValid;
         }
 
-        public virtual bool ValidateEndPosition(Position position, char[] rows, char[] columns, string[,] grid)
+        public bool ValidateEndPosition(Position endPosition, Position startPosition, int size, char[] rows, char[] columns, string[,] grid)
         {
-            return false;
+            bool isValid = false;
+
+            // second point must be an empty cell, this scenario is covered in ValidateStartPosition method
+            isValid = ValidateStartPosition(endPosition, rows, columns, grid);
+
+            if (isValid)
+            {
+                Point startPoint = new Point() { Row = Array.IndexOf(rows, startPosition.Row), Column = Array.IndexOf(columns, startPosition.Column) };
+                Point endPoint = new Point() { Row = Array.IndexOf(rows, endPosition.Row), Column = Array.IndexOf(columns, endPosition.Column) };
+
+                if (Orientation == Orientations.Horizontal)
+                {
+                    isValid = Math.Abs(startPoint.Row - endPoint.Row) == 0 && Math.Abs(startPoint.Column - endPoint.Column) == Size - 1;
+                }
+                else
+                {
+                    isValid = Math.Abs(startPoint.Row - endPoint.Row) == Size - 1 && Math.Abs(startPoint.Column - endPoint.Column) == 0;
+                }
+            }
+
+            return isValid;
         }
 
     }

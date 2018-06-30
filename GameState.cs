@@ -9,9 +9,6 @@ namespace BattleshipConsole
 
     public class GameState
     {
-        //public Board HumanPlayerBoard { get; set; }
-        //public Board ComputerPlayerBoard { get; set; }
-
         public ComputerPlayer Computer { get; set; }
         public HumanPlayer Human { get; set; }
 
@@ -34,15 +31,18 @@ namespace BattleshipConsole
         public void DisplayBoards()
         {
             Console.WriteLine($"{Environment.NewLine}\t {Constants.HUMAN_STRING}");
-           // Human.Board.PlaceAllShips();
-            Human.DisplayBoard();
+            Human.Board.PlaceAllShips();
+            Human.Board.DisplayBoard();
 
             Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}\t {Constants.COMPUTER_STRING}");
-           // Computer.Board.PlaceAllShips();
+            //Computer.Board.PlaceAllShips();
             Computer.DisplayBoard();
 
-            Console.WriteLine($"\t{Environment.NewLine}{Environment.NewLine}{Constants.LEGENT_STRING}: {Environment.NewLine}" +
-               $"DE: {Constants.DESTROYER_STRING},  BS: {Constants.BATTLESHIP_STRING},  HM: {Constants.HIT_MISSED},  HS: {Constants.HIT_SUCCESSFUL}");
+            Console.WriteLine($"\t{Environment.NewLine}{Environment.NewLine}{Constants.LEGEND_STRING}: {Environment.NewLine}" +
+               $"{Constants.LEGEND_DESTROYER}: {Constants.DESTROYER_STRING},  " +
+               $"{Constants.LEGEND_BATTLESHIP}: {Constants.BATTLESHIP_STRING},  " +
+               $"{Constants.LEGEND_HIT_MISSED}: {Constants.HIT_MISSED},  " +
+               $"{Constants.LEGEND_HIT_SUCCESSFUL}: {Constants.HIT_SUCCESSFUL}");
         }
 
 
