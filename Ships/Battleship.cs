@@ -12,10 +12,5 @@ namespace BattleshipConsole.Ships
         {
             Size = 5;
         }
-
-        internal void Place()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

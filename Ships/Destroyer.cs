@@ -13,7 +13,24 @@ namespace BattleshipConsole.Ships
             Size = 4;
         }
 
-        public void Place()
+
+        public override bool ValidateStartPosition(Position position, char[] rows, char[] columns, string[,] grid)
+        {
+            bool isValid = false;
+            isValid = rows.Contains(Char.ToUpper(position.Row)) && columns.Contains(position.Column);
+            if (isValid)
+            {
+            }
+
+
+            return isValid;
+        }
+
+
+        /// <summary>
+        /// Will be used to place first destroyer/ship
+        /// </summary>
+        public override void Place(char[] rows, char[] columns, char[] validRows, char[] validColumns, string[,] grid)
         {
             bool isOrientationValid = false;
             while (!isOrientationValid)
@@ -24,9 +41,7 @@ namespace BattleshipConsole.Ships
                 isOrientationValid = ValidateOrientation(orientation);
 
                 if (!isOrientationValid)
-                {
-                    Console.WriteLine($"{Constants.INVALID_INPUT}. {Constants.TRY_AGAIN}");
-                }
+                    Console.WriteLine(GetInvalidInputText());
                 else
                 {
                     Orientation = orientation == '1' ? Ship.Orientations.Vertical : Ship.Orientations.Horizontal;
@@ -34,9 +49,26 @@ namespace BattleshipConsole.Ships
                 }
             }
 
-            Console.Write($"{Environment.NewLine} Enter start location: ");
-            StartPosition.Row = Console.ReadKey().KeyChar;
-            StartPosition.Column = Console.ReadKey().KeyChar;
+            bool isPositionValid = false;
+            while (!isPositionValid)
+            {
+                Console.Write($"{Environment.NewLine} Enter start location: ");
+                StartPosition.Row = Console.ReadKey().KeyChar;
+                StartPosition.Column = Console.ReadKey().KeyChar;
+
+                isPositionValid = ValidateStartPosition(StartPosition, rows, columns, grid);
+                if (!isPositionValid) continue;
+                isPositionValid = ValidateEndPosition(StartPosition, rows, columns, grid);
+            }
+
+        }
+
+        /// <summary>
+        /// Will be used to place a destroyer/ship after the first one
+        /// </summary>
+        public void Place(string[,] ValidPositions)
+        {
+
         }
     }
 }

@@ -34,11 +34,11 @@ namespace BattleshipConsole
         public void DisplayBoards()
         {
             Console.WriteLine($"{Environment.NewLine}\t {Constants.HUMAN_STRING}");
-            Human.Board.PlaceAllShips();
+           // Human.Board.PlaceAllShips();
             Human.DisplayBoard();
 
             Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}\t {Constants.COMPUTER_STRING}");
-            Computer.Board.PlaceAllShips();
+           // Computer.Board.PlaceAllShips();
             Computer.DisplayBoard();
 
             Console.WriteLine($"\t{Environment.NewLine}{Environment.NewLine}{Constants.LEGENT_STRING}: {Environment.NewLine}" +
@@ -48,9 +48,7 @@ namespace BattleshipConsole
 
         public bool ValidateInput(Input input)
         {
-            bool isInputValid = true;
-            isInputValid = Human.Board.Rows.Contains(Char.ToUpper(input.Row)) && Computer.Board.Columns.Contains(input.Column);
-            return isInputValid;
+            return Human.Board.Rows.Contains(Char.ToUpper(input.Row)) && Computer.Board.Columns.Contains(input.Column);
         }
 
         public void Start()
@@ -79,7 +77,7 @@ namespace BattleshipConsole
 
                 if (!IsInputValid)
                 {
-                    Console.Write($"{Environment.NewLine} {Constants.INVALID_INPUT}. {Constants.TRY_AGAIN}. {Environment.NewLine} {currentPlayer.Name}: ");
+                    Console.Write($"{Environment.NewLine} {Human.Board.Destroyer1.GetInvalidInputText()} {Environment.NewLine} {currentPlayer.Name}: ");
 
                     currentPlayer.Input.Row = Console.ReadKey().KeyChar;
                     currentPlayer.Input.Column = Console.ReadKey().KeyChar;

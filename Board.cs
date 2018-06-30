@@ -14,6 +14,9 @@ namespace BattleshipConsole
         public readonly char[] Rows = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         public readonly char[] Columns = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
 
+        public readonly char[] ValidRows = { '+', '+', '+', '+', '+', '+', '+', '+', '+', '+' };
+        public readonly char[] ValidColumns = { '+', '+', '+', '+', '+', '+', '+', '+', '+', '+' };
+
         public int NumberOfShips { get; set; }
 
         public Destroyer Destroyer1 { get; set; }
@@ -28,15 +31,15 @@ namespace BattleshipConsole
 
             for (int column = 0; column < Constants.BOARD_ROWS_COUNT; ++column)
                 for (int row = 0; row < Constants.BOARD_COLUMNS_COUNT; ++row)
-                    Grid[column, row] = Columns[column].ToString() + Rows[row].ToString();
+                    Grid[column, row] = ValidColumns[column].ToString() + ValidRows[row].ToString();
         }
 
         // this should set all the data of the ships and here the ships will be rendered
         public void PlaceAllShips()
         {
-            Destroyer1.Place();
-            Destroyer2.Place();
-            Battleship.Place();
+            Destroyer1.Place(Rows, Columns, ValidRows, ValidColumns, Grid);
+            Destroyer2.Place(Rows, Columns, ValidRows, ValidColumns, Grid);
+            Battleship.Place(Rows, Columns, ValidRows, ValidColumns, Grid);
         }
 
         //public void DisplayBoard()

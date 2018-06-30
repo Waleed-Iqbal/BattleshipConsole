@@ -21,6 +21,11 @@ namespace BattleshipConsole
 
         public Position StartPosition;
 
+        public Ship()
+        {
+            Orientation = Orientations.Horizontal;
+        }
+
         public enum Orientations
         {
             Horizontal,
@@ -32,10 +37,18 @@ namespace BattleshipConsole
             return orientation == '1' || orientation == '2';
         }
 
-        public Ship()
+
+        public virtual void Place(char[] rows, char[] columns, char[] validRows, char[] validColumns, string[,] Grid)
         {
-            Orientation = Orientations.Horizontal;
+
         }
+
+
+        public string GetInvalidInputText()
+        {
+            return $"{Constants.INVALID_INPUT}. {Constants.TRY_AGAIN}";
+        }
+
 
         public void GetOrientationText()
         {
@@ -44,5 +57,16 @@ namespace BattleshipConsole
                 $"2. {Constants.HORIZONTAL} {Environment.NewLine}" +
                 $"==> ");
         }
+
+        public virtual bool ValidateStartPosition(Position position, char[] rows, char[] columns, string[,] grid)
+        {
+            return false;
+        }
+
+        public virtual bool ValidateEndPosition(Position position, char[] rows, char[] columns, string[,] grid)
+        {
+            return false;
+        }
+
     }
 }
