@@ -9,8 +9,8 @@ namespace BattleshipConsole
 
     public class GameState
     {
-        public ComputerPlayer Computer { get; set; }
         public HumanPlayer Human { get; set; }
+        public ComputerPlayer Computer { get; set; }
 
         public bool IsGameOver { get; set; }
         public bool IsHumanTurn { get; set; }
@@ -19,11 +19,11 @@ namespace BattleshipConsole
 
         public GameState()
         {
-            Computer = new ComputerPlayer();
             Human = new HumanPlayer();
+            Computer = new ComputerPlayer();
 
-            IsHumanTurn = false; // will be turned to true at the start of game loop
             IsGameOver = false;
+            IsHumanTurn = false; // will be turned to true at the start of game loop
             IsShipPlacementComplete = false;
 
         }
