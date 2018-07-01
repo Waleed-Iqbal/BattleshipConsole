@@ -13,7 +13,6 @@ namespace BattleshipConsole
             GameState Game = new GameState();
             Game.Start();
 
-
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);

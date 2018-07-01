@@ -15,6 +15,9 @@ namespace BattleshipConsole
     public class Player
     {
         public string Name { get; set; }
+        public int NumberOfHitsOnDE { get; set; }
+        public int NumberOfHitsOnBS { get; set; }
+        public int NumberOfShipsDestroyed { get; set; }
         public bool IsCurrentTurn { get; set; }
         public bool IsWinner { get; set; }
         public Input Input;
@@ -25,6 +28,9 @@ namespace BattleshipConsole
             Board = new Board();
             Input.Row = ' ';
             Input.Column = ' ';
+            NumberOfHitsOnDE = 0;
+            NumberOfHitsOnBS = 0;
+            NumberOfShipsDestroyed = 0;
         }
     }
 }

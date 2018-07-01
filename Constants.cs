@@ -34,6 +34,10 @@ namespace BattleshipConsole
         public const string PLACE_BATTLESHIP = "Place battleship (5 cells)";
         public const string VETICAL = "Vertical";
         public const string HORIZONTAL = "Horizontal";
+        public const string LEGEND_EMPTY_CELL = "++";
+        public const string EMPTY_CELL_STRING = "Empty Cell";
+        public const string ELIMINATED = "Eliminated";
+        public const string WON = "Won";
 
 
     }

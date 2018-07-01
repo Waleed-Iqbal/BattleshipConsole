@@ -10,3 +10,5 @@ Things that can be improved.
 -> Add comments.
 -> More user frieendly error messages to user for the invalid input.
 -> Don't display opponent's ships on screen.
+-> Overlappting ships validation while placing.
+-> There is a out of bound exception while placing ships. It occurs very randomly. I wonder how and when that occurs?
