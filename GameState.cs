@@ -31,15 +31,16 @@ namespace BattleshipConsole
         public void DisplayBoards()
         {
             Console.WriteLine($"{Environment.NewLine}\t {Constants.HUMAN_STRING}");
+
             Human.Board.DisplayBoard();
-            Human.Board.PlaceAllShips();
+            Human.PlaceAllShips();
             Human.Board.DisplayBoard();
 
             //Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}\t {Constants.COMPUTER_STRING}");
             //Computer.Board.PlaceAllShips();
-           // Computer.DisplayBoard();
+            //Computer.DisplayBoard();
 
-            Console.WriteLine($"\t{Environment.NewLine}{Environment.NewLine}{Constants.LEGEND_STRING}: {Environment.NewLine}" +
+            Console.WriteLine($"\t{Environment.NewLine}{Environment.NewLine} {Constants.LEGEND_STRING}: {Environment.NewLine} " +
                $"{Constants.LEGEND_DESTROYER}: {Constants.DESTROYER_STRING},  " +
                $"{Constants.LEGEND_BATTLESHIP}: {Constants.BATTLESHIP_STRING},  " +
                $"{Constants.LEGEND_HIT_MISSED}: {Constants.HIT_MISSED},  " +
@@ -56,9 +57,6 @@ namespace BattleshipConsole
         {
             Console.Clear();
             DisplayBoards();
-
-            //Human.PlaceShips();
-            //Computer.PlaceShips();
 
             while (!IsGameOver)
             {

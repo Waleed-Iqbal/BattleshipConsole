@@ -9,7 +9,7 @@ namespace BattleshipConsole
 {
     public class Board
     {
-        string[,] Grid { get; set; }
+        public string[,] Grid { get; set; }
 
         public readonly char[] Rows = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         public readonly char[] Columns = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
@@ -37,15 +37,6 @@ namespace BattleshipConsole
                     Grid[column, row] = ValidColumns[column].ToString() + ValidRows[row].ToString();
         }
 
-        // this should set all the data of the ships and here the ships will be rendered
-        public void PlaceAllShips()
-        {
-            Destroyer1.Place(Rows, Columns, Grid);
-            DisplayBoard();
-            Destroyer2.Place(Rows, Columns, Grid);
-            DisplayBoard();
-            Battleship.Place(Rows, Columns, Grid);
-        }
 
         public void DisplayBoard()
         {

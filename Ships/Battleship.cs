@@ -11,11 +11,9 @@ namespace BattleshipConsole.Ships
         public Battleship()
         {
             Size = 5;
+            Legend = Constants.LEGEND_BATTLESHIP;
+            PlacingString = Constants.PLACE_BATTLESHIP;
         }
 
-        public void Place(char[] rows, char[] columns, string[,] grid)
-        {
-            base.Place(rows, columns, grid, Constants.PLACE_BATTLESHIP, Constants.LEGEND_BATTLESHIP);
-        }
     }
 }

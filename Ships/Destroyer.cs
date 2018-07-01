@@ -11,11 +11,9 @@ namespace BattleshipConsole.Ships
         public Destroyer()
         {
             Size = 4;
+            Legend = Constants.LEGEND_DESTROYER;
+            PlacingString = Constants.PLACE_DESTROYER;
         }
 
-        public void Place(char[] rows, char[] columns, string[,] grid)
-        {
-            base.Place(rows, columns, grid, Constants.PLACE_DESTROYER, Constants.LEGEND_DESTROYER);
-        }
     }
 }

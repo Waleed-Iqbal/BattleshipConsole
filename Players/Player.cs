@@ -20,11 +20,6 @@ namespace BattleshipConsole
         public Input Input;
         public Board Board;
 
-
-        public virtual void PlaceShips()
-        {
-        }
-
         public Player()
         {
             Board = new Board();
