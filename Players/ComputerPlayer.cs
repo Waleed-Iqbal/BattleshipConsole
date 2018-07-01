@@ -8,11 +8,15 @@ namespace BattleshipConsole
 {
     public class ComputerPlayer : Player
     {
+        private Position InvalidPosition;
         public ComputerPlayer()
         {
+            InvalidPosition = new Position();
+            InvalidPosition.Row = 'x';
+            InvalidPosition.Column = 'x';
+
             Name = Constants.COMPUTER_NAME;
         }
-
 
         private int GetRandomNumberInExludedRange(int start, int end, HashSet<int> exclude)
         {
@@ -37,25 +41,99 @@ namespace BattleshipConsole
             return GetRandomNumberInRange(1, 2);
         }
 
-
         private Position GetRandomGridPosition(Ship ship)
         {
             Position randPosition = new Position();
             Point randPoint = new Point();
             Random rand = new Random();
+            bool isValidPosition = false;
 
-            randPoint.Column = rand.Next(Board.Grid.GetLength(0));
-            randPoint.Row = rand.Next(Board.Grid.GetLength(1));
+            while (!isValidPosition)
+            {
+                randPoint.Column = rand.Next(Board.Grid.GetLength(0));
+                randPoint.Row = rand.Next(Board.Grid.GetLength(1));
 
-            string cellContents = Board.Grid[randPoint.Column, randPoint.Row];
-            randPosition.Column = cellContents[0];
-            randPosition.Row = cellContents[1];
+                string cellContents = Board.Grid[randPoint.Column, randPoint.Row];
+                randPosition.Column = cellContents[0];
+                randPosition.Row = cellContents[1];
+                isValidPosition = ship.ValidateCellContents(cellContents);
 
-            bool isValid = ship.ValidateStartPosition(randPosition, Board.Rows, Board.Columns, Board.Grid);
-
+                randPosition.Column = Board.Columns[randPoint.Column];
+                randPosition.Row = Board.Rows[randPoint.Row];
+            }
             return randPosition;
         }
 
+        private Position GetRandomEndPosition(Ship ship)
+        {
+            Position endPosition = new Position();
+            Point endPoint = new Point();
+
+            bool isValidPosition = false;
+
+            while (!isValidPosition)
+            {
+                if (ship.Orientation == Ship.Orientations.Horizontal)
+                {
+                    endPoint.Column = Array.IndexOf(Board.Columns, ship.StartPosition.Column) + (ship.Size - 1);
+                    endPoint.Row = Array.IndexOf(Board.Rows, ship.StartPosition.Row);
+
+                    string cellContents = "";
+                    isValidPosition = endPoint.Column < Board.Columns.Length && endPoint.Row < Board.Rows.Length;
+                    if (isValidPosition)
+                    {
+                        cellContents = Board.Grid[endPoint.Column, endPoint.Row];
+                        endPosition.Column = cellContents[0];
+                        endPosition.Row = cellContents[1];
+                        isValidPosition = ship.ValidateCellContents(cellContents);
+                    }
+
+                    if (!isValidPosition)
+                    {
+                        endPoint.Column = Array.IndexOf(Board.Columns, ship.StartPosition.Column) - (ship.Size - 1);
+                        endPoint.Row = Array.IndexOf(Board.Rows, ship.StartPosition.Row);
+                        cellContents = Board.Grid[endPoint.Column, endPoint.Row];
+                        endPosition.Column = cellContents[0];
+                        endPosition.Row = cellContents[1];
+                        isValidPosition = ship.ValidateCellContents(cellContents);
+                        return InvalidPosition;
+                    }
+                }
+                else
+                {
+                    endPoint.Column = Array.IndexOf(Board.Columns, ship.StartPosition.Column);
+                    endPoint.Row = Array.IndexOf(Board.Rows, ship.StartPosition.Row) + (ship.Size - 1);
+
+                    string cellContents = "";// Board.Grid[endPoint.Column, endPoint.Row];
+                    isValidPosition = endPoint.Column < Board.Columns.Length && endPoint.Row < Board.Rows.Length;
+
+                    if (isValidPosition)
+                    {
+                        cellContents = Board.Grid[endPoint.Column, endPoint.Row];
+                        endPosition.Column = cellContents[0];
+                        endPosition.Row = cellContents[1];
+                        isValidPosition = ship.ValidateCellContents(cellContents);
+                    }
+                    if (!isValidPosition)
+                    {
+                        endPoint.Column = Array.IndexOf(Board.Columns, ship.StartPosition.Column);
+                        endPoint.Row = Array.IndexOf(Board.Rows, ship.StartPosition.Row) - (ship.Size - 1);
+                        cellContents = Board.Grid[endPoint.Column, endPoint.Row];
+                        endPosition.Column = cellContents[0];
+                        endPosition.Row = cellContents[1];
+                        isValidPosition = ship.ValidateCellContents(cellContents); 
+                        return InvalidPosition;
+                    }
+                }
+            }
+
+            if (isValidPosition)
+            {
+                endPosition.Column = Board.Columns[endPoint.Column];
+                endPosition.Row = Board.Rows[endPoint.Row];
+            }
+            return endPosition;
+        }
 
         private void PlaceShip(Ship ship)
         {
@@ -63,16 +141,51 @@ namespace BattleshipConsole
                 Ship.Orientations.Horizontal :
                 Ship.Orientations.Vertical;
 
+            bool isShipPlaced = false;
+
+            while (!isShipPlaced)
+            {
+                ship.StartPosition = GetRandomGridPosition(ship);
+                ship.EndPosition = GetRandomEndPosition(ship);
+                isShipPlaced = !ship.EndPosition.Equals(InvalidPosition);
+            }
 
 
+            Point startPoint = new Point() { Row = Array.IndexOf(Board.Rows, ship.StartPosition.Row), Column = Array.IndexOf(Board.Columns, ship.StartPosition.Column) };
+            Point endPoint = new Point() { Row = Array.IndexOf(Board.Rows, ship.EndPosition.Row), Column = Array.IndexOf(Board.Columns, ship.EndPosition.Column) };
+
+            if (ship.Orientation == Ship.Orientations.Vertical)
+            {
+                if (startPoint.Row - endPoint.Row < 0)
+                {
+                    for (var i = startPoint.Row; i <= endPoint.Row; i++)
+                        Board.Grid[startPoint.Column, i] = ship.Legend;
+                }
+                else
+                {
+                    for (var i = endPoint.Row; i <= startPoint.Row; i++)
+                        Board.Grid[startPoint.Column, i] = ship.Legend;
+                }
+            }
+            else
+            {
+                if (startPoint.Column - endPoint.Column < 0)
+                {
+                    for (var i = startPoint.Column; i <= endPoint.Column; i++)
+                        Board.Grid[i, startPoint.Row] = ship.Legend;
+                }
+                else
+                {
+                    for (var i = endPoint.Column; i <= startPoint.Column; i++)
+                        Board.Grid[i, startPoint.Row] = ship.Legend;
+                }
+            }
         }
 
         public void PlaceAllShips()
         {
             PlaceShip(Board.Destroyer1);
-            Board.DisplayBoard();
             PlaceShip(Board.Destroyer2);
-            Board.DisplayBoard();
             PlaceShip(Board.Battleship);
         }
     }

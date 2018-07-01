@@ -61,6 +61,13 @@ namespace BattleshipConsole
                 $"==> ";
         }
 
+        public bool ValidateCellContents(string candidateCellContents)
+        {
+            bool isValid = false;
+             isValid =  !(candidateCellContents == Constants.LEGEND_BATTLESHIP || candidateCellContents == Constants.LEGEND_DESTROYER);
+            return isValid;
+        }
+
         public bool ValidateStartPosition(Position position, char[] rows, char[] columns, string[,] grid)
         {
             bool isValid = false;
@@ -71,7 +78,7 @@ namespace BattleshipConsole
                 int columnIndex = Array.IndexOf(columns, position.Column);
                 string candidateCellContents = grid[columnIndex, rowIndex];
 
-                isValid = !(candidateCellContents == Constants.LEGEND_BATTLESHIP || candidateCellContents == Constants.LEGEND_DESTROYER);
+                isValid = ValidateCellContents(candidateCellContents);
             }
             return isValid;
         }

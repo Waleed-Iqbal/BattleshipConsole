@@ -31,14 +31,16 @@ namespace BattleshipConsole
         public void DisplayBoards()
         {
             Console.WriteLine($"{Environment.NewLine}\t {Constants.HUMAN_STRING}");
-
             Human.Board.DisplayBoard();
             Human.PlaceAllShips();
             Human.Board.DisplayBoard();
 
-            //Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}\t {Constants.COMPUTER_STRING}");
-            //Computer.Board.PlaceAllShips();
-            //Computer.DisplayBoard();
+            Console.Clear();
+            
+            Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}\t {Constants.COMPUTER_STRING}");
+            Computer.Board.DisplayBoard();
+            Computer.PlaceAllShips();
+            Computer.Board.DisplayBoard();
 
             Console.WriteLine($"\t{Environment.NewLine}{Environment.NewLine} {Constants.LEGEND_STRING}: {Environment.NewLine} " +
                $"{Constants.LEGEND_DESTROYER}: {Constants.DESTROYER_STRING},  " +
