@@ -12,12 +12,5 @@ namespace BattleshipConsole
         {
             Name = Constants.HUMAN_NAME;
         }
-
-        //public void DisplayBoard()
-        //{
-
-            
-        //}
-
     }
 }

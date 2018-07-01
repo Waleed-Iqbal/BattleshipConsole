@@ -41,13 +41,15 @@ namespace BattleshipConsole
         public void PlaceAllShips()
         {
             Destroyer1.Place(Rows, Columns, Grid);
+            DisplayBoard();
             Destroyer2.Place(Rows, Columns, Grid);
+            DisplayBoard();
             Battleship.Place(Rows, Columns, Grid);
         }
 
         public void DisplayBoard()
         {
-            Console.Write($"{Environment.NewLine}    ");
+            Console.Write($"{Environment.NewLine}{Environment.NewLine}    ");
             foreach (char c in Columns)
                 Console.Write($" {c} ");
 

@@ -12,10 +12,5 @@ namespace BattleshipConsole
         {
             Name = Constants.COMPUTER_NAME;
         }
-
-        public void DisplayBoard()
-        {
-
-        }
     }
 }
