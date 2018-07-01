@@ -30,6 +30,10 @@ namespace BattleshipConsole
         public string Legend { get; set; }
         public string PlacingString { get; set; }
 
+        // To keep track of the location of ship location
+        public char[] LocationRows { get; set; }
+        public char[] LocationColumns { get; set; }
+
         public Ship()
         {
             Orientation = Orientations.Horizontal;

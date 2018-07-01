@@ -9,11 +9,14 @@ namespace BattleshipConsole
     public class ComputerPlayer : Player
     {
         private Position InvalidPosition;
+
         public ComputerPlayer()
         {
-            InvalidPosition = new Position();
-            InvalidPosition.Row = 'x';
-            InvalidPosition.Column = 'x';
+            InvalidPosition = new Position
+            {
+                Row = 'x',
+                Column = 'x'
+            };
 
             Name = Constants.COMPUTER_NAME;
         }
@@ -121,7 +124,7 @@ namespace BattleshipConsole
                         cellContents = Board.Grid[endPoint.Column, endPoint.Row];
                         endPosition.Column = cellContents[0];
                         endPosition.Row = cellContents[1];
-                        isValidPosition = ship.ValidateCellContents(cellContents); 
+                        isValidPosition = ship.ValidateCellContents(cellContents);
                         return InvalidPosition;
                     }
                 }
@@ -156,28 +159,50 @@ namespace BattleshipConsole
 
             if (ship.Orientation == Ship.Orientations.Vertical)
             {
+                shipLocationCounter = 0;
                 if (startPoint.Row - endPoint.Row < 0)
                 {
                     for (var i = startPoint.Row; i <= endPoint.Row; i++)
+                    {
+                        ship.LocationRows[shipLocationCounter] = Board.Rows[i];
+                        ship.LocationColumns[shipLocationCounter] = Board.Columns[startPoint.Column];
+                        shipLocationCounter++;
                         Board.Grid[startPoint.Column, i] = ship.Legend;
+                    }
                 }
                 else
                 {
                     for (var i = endPoint.Row; i <= startPoint.Row; i++)
+                    {
+                        ship.LocationRows[shipLocationCounter] = Board.Rows[i];
+                        ship.LocationColumns[shipLocationCounter] = Board.Columns[startPoint.Column];
+                        shipLocationCounter++;
                         Board.Grid[startPoint.Column, i] = ship.Legend;
+                    }
                 }
             }
-            else
+            else // Horizontal
             {
+                shipLocationCounter = 0;
                 if (startPoint.Column - endPoint.Column < 0)
                 {
                     for (var i = startPoint.Column; i <= endPoint.Column; i++)
+                    {
+                        ship.LocationRows[shipLocationCounter] = Board.Rows[startPoint.Row];
+                        ship.LocationColumns[shipLocationCounter] = Board.Columns[i];
+                        shipLocationCounter++;
                         Board.Grid[i, startPoint.Row] = ship.Legend;
+                    }
                 }
                 else
                 {
                     for (var i = endPoint.Column; i <= startPoint.Column; i++)
+                    {
+                        ship.LocationRows[shipLocationCounter] = Board.Rows[startPoint.Row];
+                        ship.LocationColumns[shipLocationCounter] = Board.Columns[i];
+                        shipLocationCounter++;
                         Board.Grid[i, startPoint.Row] = ship.Legend;
+                    }
                 }
             }
         }

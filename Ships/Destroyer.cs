@@ -13,7 +13,8 @@ namespace BattleshipConsole.Ships
             Size = 4;
             Legend = Constants.LEGEND_DESTROYER;
             PlacingString = Constants.PLACE_DESTROYER;
+            LocationRows = new char[Size];
+            LocationColumns = new char[Size];
         }
-
     }
 }

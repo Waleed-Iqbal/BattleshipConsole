@@ -67,28 +67,50 @@ namespace BattleshipConsole
 
                 if (ship.Orientation == Ship.Orientations.Vertical)
                 {
+                    shipLocationCounter = 0;
                     if (startPoint.Row - endPoint.Row < 0)
                     {
-                        for (var i = startPoint.Row; i <= endPoint.Row; i++)
+                        for (int i = startPoint.Row; i <= endPoint.Row; i++)
+                        {
+                            ship.LocationRows[shipLocationCounter] = Board.Rows[i];
+                            ship.LocationColumns[shipLocationCounter] = Board.Columns[startPoint.Column];
+                            shipLocationCounter++;
                             Board.Grid[startPoint.Column, i] = ship.Legend;
+                        }
                     }
                     else
                     {
                         for (var i = endPoint.Row; i <= startPoint.Row; i++)
+                        {
+                            ship.LocationRows[shipLocationCounter] = Board.Rows[i];
+                            ship.LocationColumns[shipLocationCounter] = Board.Columns[startPoint.Column];
+                            shipLocationCounter++;
                             Board.Grid[startPoint.Column, i] = ship.Legend;
+                        }
                     }
                 }
                 else
                 {
+                    shipLocationCounter = 0;
                     if (startPoint.Column - endPoint.Column < 0)
                     {
                         for (var i = startPoint.Column; i <= endPoint.Column; i++)
+                        {
+                            ship.LocationRows[shipLocationCounter] = Board.Rows[startPoint.Row];
+                            ship.LocationColumns[shipLocationCounter] = Board.Columns[i];
+                            shipLocationCounter++;
                             Board.Grid[i, startPoint.Row] = ship.Legend;
+                        }
                     }
                     else
                     {
                         for (var i = endPoint.Column; i <= startPoint.Column; i++)
+                        {
+                            ship.LocationRows[shipLocationCounter] = Board.Rows[startPoint.Row];
+                            ship.LocationColumns[shipLocationCounter] = Board.Columns[i];
+                            shipLocationCounter++;
                             Board.Grid[i, startPoint.Row] = ship.Legend;
+                        }
                     }
                 }
             }
@@ -97,9 +119,9 @@ namespace BattleshipConsole
 
         public void PlaceAllShips()
         {
-            PlaceShip(Board.Destroyer1, new FakeInput() {Ori='1', StarCol='A', StartRow='0', EndCol='D', EndRow='0' });
-            PlaceShip(Board.Destroyer2, new FakeInput() {Ori='1', StarCol = 'A', StartRow = '1', EndCol = 'D', EndRow = '1' });
-            PlaceShip(Board.Battleship, new FakeInput() {Ori='1', StarCol = 'A', StartRow = '2', EndCol = 'E', EndRow = '2' });
+            PlaceShip(Board.Destroyer1, new FakeInput() { Ori = '1', StarCol = 'A', StartRow = '0', EndCol = 'D', EndRow = '0' });
+            PlaceShip(Board.Destroyer2, new FakeInput() { Ori = '1', StarCol = 'A', StartRow = '1', EndCol = 'D', EndRow = '1' });
+            PlaceShip(Board.Battleship, new FakeInput() { Ori = '1', StarCol = 'A', StartRow = '2', EndCol = 'E', EndRow = '2' });
         }
     }
 }
