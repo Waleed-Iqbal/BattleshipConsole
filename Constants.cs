@@ -15,7 +15,7 @@ namespace BattleshipConsole
         public const int NUMBER_OF_BATTLESHIPS = 1;
 
 
-        public const string WON = "Won";
+        public const string WON = "WON";
         public const string HUMAN_NAME = "You";
         public const string VETICAL = "Vertical";
         public const string HUMAN_STRING = "YOU";
@@ -38,7 +38,6 @@ namespace BattleshipConsole
         public const string HIT_SUCCESSFUL = "Hit Successful";
         public const string PLACE_DESTROYER = "Place destroyer (4 cells)";
         public const string PLACE_BATTLESHIP = "Place battleship (5 cells)";
-
-
+        public const string PRESS_ANY_KEY_CONT = "Press any key to continue ...";
     }
 }

@@ -22,7 +22,7 @@ namespace BattleshipConsole
             public char StartRow;
         }
 
-        private void PlaceShip(Ship ship, FakeInput fakeInput)
+        private void PlaceShip(Ship ship)//, FakeInput fakeInput)
         {
             bool isOrientationValid = false;
             while (!isOrientationValid)
@@ -30,7 +30,7 @@ namespace BattleshipConsole
                 Console.WriteLine($"{Environment.NewLine}{Environment.NewLine} {ship.PlacingString}:");
                 Console.Write(ship.GetOrientationText());
 
-                char orientation = fakeInput.Ori;// Console.ReadKey().KeyChar;
+                char orientation = Console.ReadKey().KeyChar; // fakeInput.Ori;
                 isOrientationValid = ship.ValidateOrientation(orientation);
 
                 if (!isOrientationValid)
@@ -45,8 +45,8 @@ namespace BattleshipConsole
             while (!isStartPositionValid)
             {
                 Console.Write($"{Environment.NewLine} Enter start location: (A0 to J9) ");
-                ship.StartPosition.Column = fakeInput.StarCol;  //Char.ToUpper(Console.ReadKey().KeyChar);
-                ship.StartPosition.Row = fakeInput.StartRow; //Console.ReadKey().KeyChar;
+                ship.StartPosition.Column = Char.ToUpper(Console.ReadKey().KeyChar); // fakeInput.StarCol;
+                ship.StartPosition.Row = Console.ReadKey().KeyChar; // fakeInput.StartRow;
 
                 isStartPositionValid = ship.ValidateStartPosition(ship.StartPosition, Board.Rows, Board.Columns, Board.Grid);
             }
@@ -55,8 +55,8 @@ namespace BattleshipConsole
             while (!isEndPositionValid)
             {
                 Console.Write($"{Environment.NewLine} Enter end location: ");
-                ship.EndPosition.Column = fakeInput.EndCol; //Char.ToUpper(Console.ReadKey().KeyChar);
-                ship.EndPosition.Row = fakeInput.EndRow; //Console.ReadKey().KeyChar;
+                ship.EndPosition.Column = Char.ToUpper(Console.ReadKey().KeyChar); // fakeInput.EndCol;
+                ship.EndPosition.Row = Console.ReadKey().KeyChar; // fakeInput.EndRow;
                 isEndPositionValid = ship.ValidateEndPosition(ship.EndPosition, ship.StartPosition, ship.Size, Board.Rows, Board.Columns, Board.Grid);
             }
 
@@ -119,9 +119,17 @@ namespace BattleshipConsole
 
         public void PlaceAllShips()
         {
-            PlaceShip(Board.Destroyer1, new FakeInput() { Ori = '1', StarCol = 'A', StartRow = '0', EndCol = 'D', EndRow = '0' });
-            PlaceShip(Board.Destroyer2, new FakeInput() { Ori = '1', StarCol = 'A', StartRow = '1', EndCol = 'D', EndRow = '1' });
-            PlaceShip(Board.Battleship, new FakeInput() { Ori = '1', StarCol = 'A', StartRow = '2', EndCol = 'E', EndRow = '2' });
+            Console.Clear();
+            Board.DisplayBoard();
+            PlaceShip(Board.Destroyer1);//, new FakeInput() { Ori = '1', StarCol = 'A', StartRow = '0', EndCol = 'D', EndRow = '0' });
+
+            Console.Clear();
+            Board.DisplayBoard();
+            PlaceShip(Board.Destroyer2);//, new FakeInput() { Ori = '1', StarCol = 'A', StartRow = '1', EndCol = 'D', EndRow = '1' });
+
+            Console.Clear();
+            Board.DisplayBoard();
+            PlaceShip(Board.Battleship);//, new FakeInput() { Ori = '1', StarCol = 'A', StartRow = '2', EndCol = 'E', EndRow = '2' });
         }
     }
 }

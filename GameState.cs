@@ -70,11 +70,11 @@ namespace BattleshipConsole
                 Console.Clear();
                 DisplayBoards();
 
-                IsHumanTurn = true;//!IsHumanTurn;
+                IsHumanTurn = !IsHumanTurn;
                 Human.IsCurrentTurn = IsHumanTurn;
                 Computer.IsCurrentTurn = !IsHumanTurn;
 
-                currentPlayer = Human;//IsHumanTurn ? (Player)Human : (Player)Computer;
+                currentPlayer = IsHumanTurn ? (Player)Human : (Player)Computer;
 
 
                 if (IsHumanTurn)
@@ -129,7 +129,7 @@ namespace BattleshipConsole
 
                                 if (Computer.Board.Battleship.LocationRows.Where(num => num == 'x').Count() == Computer.Board.Battleship.Size)
                                 {
-                                    Console.WriteLine($" {Constants.BATTLESHIP_STRING} {Constants.ELIMINATED}");
+                                    Console.WriteLine($" {Constants.BATTLESHIP_STRING} {Constants.ELIMINATED} {Environment.NewLine} {Environment.NewLine} {Constants.PRESS_ANY_KEY_CONT} ");
                                     Computer.NumberOfShipsDestroyed++;
                                     Console.ReadKey();
                                 }
@@ -155,7 +155,7 @@ namespace BattleshipConsole
 
                                 if (Computer.Board.Destroyer1.LocationRows.Where(num => num == 'x').Count() == Computer.Board.Destroyer1.Size)
                                 {
-                                    Console.WriteLine($" {Constants.DESTROYER_STRING} {Constants.ELIMINATED}");
+                                    Console.WriteLine($" {Constants.DESTROYER_STRING} {Constants.ELIMINATED} {Environment.NewLine} {Environment.NewLine} {Constants.PRESS_ANY_KEY_CONT} ");
                                     Computer.NumberOfShipsDestroyed++;
                                     Console.ReadKey();
                                 }
@@ -167,7 +167,7 @@ namespace BattleshipConsole
 
                                 if (Computer.Board.Destroyer2.LocationRows.Where(num => num == 'x').Count() == Computer.Board.Destroyer2.Size)
                                 {
-                                    Console.WriteLine($" {Constants.DESTROYER_STRING} {Constants.ELIMINATED}");
+                                    Console.WriteLine($" {Constants.DESTROYER_STRING} {Constants.ELIMINATED} {Environment.NewLine} {Environment.NewLine} {Constants.PRESS_ANY_KEY_CONT} ");
                                     Computer.NumberOfShipsDestroyed++;
                                     Console.ReadKey();
                                 }
@@ -185,7 +185,96 @@ namespace BattleshipConsole
                 else // Computer's turn
                 {
                     // TODO: Should be handled in ComputerPlayer class
+                    Position hitPosition = Computer.GetRandomHitPosition(Human.Board);
+                    Computer.Input.Row = hitPosition.Row; 
+                    Computer.Input.Column = hitPosition.Column;
 
+
+                    Point aimPoint = new Point
+                    {
+                        Column = Array.IndexOf(Human.Board.Columns, Computer.Input.Column),
+                        Row = Array.IndexOf(Human.Board.Rows, Computer.Input.Row)
+                    };
+
+                    string cellContents = Human.Board.Grid[aimPoint.Column, aimPoint.Row];
+
+                    if (cellContents == Constants.HIT_MISSED || cellContents == Constants.HIT_SUCCESSFUL)
+                    {
+                        IsInputValid = false;
+                        Console.Write($"{Environment.NewLine} {Human.Board.Destroyer1.GetInvalidInputText()} {Environment.NewLine} {Human.Name}: ");
+                        continue;
+                    }
+                    else if (cellContents == Constants.LEGEND_EMPTY_CELL)
+                    {
+                        Human.Board.Grid[aimPoint.Column, aimPoint.Row] = Constants.LEGEND_HIT_MISSED;
+                        Console.WriteLine($"{Environment.NewLine} {Constants.HUMAN_NAME}: {Constants.HIT_MISSED}");
+                    }
+                    else if (cellContents == Constants.LEGEND_BATTLESHIP)
+                    {
+                        Human.Board.Grid[aimPoint.Column, aimPoint.Row] = Constants.LEGEND_HIT_SUCCESSFUL;
+                        Console.WriteLine($"{Environment.NewLine} {Constants.HUMAN_NAME}: {Constants.HIT_SUCCESSFUL}");
+
+                        int bsLocationColIndex = Array.IndexOf(Human.Board.Battleship.LocationColumns, Computer.Input.Column);
+                        int bsLocationRowIndex = Array.IndexOf(Human.Board.Battleship.LocationRows, Computer.Input.Row);
+
+                        if (bsLocationColIndex > -1 && bsLocationRowIndex > -1)
+                        {
+                            Human.Board.Battleship.LocationColumns[bsLocationColIndex] = 'x';
+                            Human.Board.Battleship.LocationRows[bsLocationRowIndex] = 'x';
+
+                            if (Human.Board.Battleship.LocationRows.Where(num => num == 'x').Count() == Human.Board.Battleship.Size)
+                            {
+                                Console.WriteLine($" {Constants.BATTLESHIP_STRING} {Constants.ELIMINATED} {Environment.NewLine} {Environment.NewLine} {Constants.PRESS_ANY_KEY_CONT} ");
+                                Human.NumberOfShipsDestroyed++;
+                                Console.ReadKey();
+                            }
+                        }
+                    }
+                    else if (cellContents == Constants.LEGEND_DESTROYER) // hit on Destroyer
+                    {
+                        // bad coding here. Need to improve this. Dynamic number of ships will cause trouble
+
+                        Human.Board.Grid[aimPoint.Column, aimPoint.Row] = Constants.LEGEND_HIT_SUCCESSFUL;
+                        Console.WriteLine($"{Environment.NewLine} {Constants.HUMAN_NAME}: {Constants.HIT_SUCCESSFUL}");
+
+                        int de1LocationColIndex = Array.IndexOf(Human.Board.Destroyer1.LocationColumns, Computer.Input.Column);
+                        int de1LocationRowIndex = Array.IndexOf(Human.Board.Destroyer1.LocationRows, Computer.Input.Row);
+
+                        int de2LocationColIndex = Array.IndexOf(Human.Board.Destroyer2.LocationColumns, Computer.Input.Column);
+                        int de2LocationRowIndex = Array.IndexOf(Human.Board.Destroyer2.LocationRows, Computer.Input.Row);
+
+                        if (de1LocationColIndex > -1 && de1LocationRowIndex > -1)
+                        {
+                            Human.Board.Destroyer1.LocationColumns[de1LocationColIndex] = 'x';
+                            Human.Board.Destroyer1.LocationRows[de1LocationRowIndex] = 'x';
+
+                            if (Human.Board.Destroyer1.LocationRows.Where(num => num == 'x').Count() == Human.Board.Destroyer1.Size)
+                            {
+                                Console.WriteLine($" {Constants.DESTROYER_STRING} {Constants.ELIMINATED} {Environment.NewLine} {Environment.NewLine} {Constants.PRESS_ANY_KEY_CONT} ");
+                                Human.NumberOfShipsDestroyed++;
+                                Console.ReadKey();
+                            }
+                        }
+                        else if (de2LocationColIndex > -1 && de2LocationRowIndex > -1)
+                        {
+                            Human.Board.Destroyer2.LocationColumns[de2LocationColIndex] = 'x';
+                            Human.Board.Destroyer2.LocationRows[de2LocationRowIndex] = 'x';
+
+                            if (Human.Board.Destroyer2.LocationRows.Where(num => num == 'x').Count() == Human.Board.Destroyer2.Size)
+                            {
+                                Console.WriteLine($" {Constants.DESTROYER_STRING} {Constants.ELIMINATED} {Environment.NewLine} {Environment.NewLine} {Constants.PRESS_ANY_KEY_CONT} ");
+                                Human.NumberOfShipsDestroyed++;
+                                Console.ReadKey();
+                            }
+                        }
+                    }
+
+                    if (Human.NumberOfShipsDestroyed == Human.Board.NumberOfShips)
+                    {
+                        Computer.IsWinner = true;
+                        IsGameOver = true;
+                        break;
+                    }
                 }
             }
             if (currentPlayer.IsWinner)

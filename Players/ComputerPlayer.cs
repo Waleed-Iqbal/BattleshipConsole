@@ -9,6 +9,7 @@ namespace BattleshipConsole
     public class ComputerPlayer : Player
     {
         private Position InvalidPosition;
+        public List<string> HitPositions;
 
         public ComputerPlayer()
         {
@@ -19,6 +20,11 @@ namespace BattleshipConsole
             };
 
             Name = Constants.COMPUTER_NAME;
+            HitPositions = new List<string>();
+            for (int i = 0; i < Board.Rows.Length; i++)
+                for (int j = 0; j < Board.Columns.Length; j++)
+                    HitPositions.Add($"{Board.Columns[j]}{Board.Rows[i]}");
+
         }
 
         private int GetRandomNumberInExludedRange(int start, int end, HashSet<int> exclude)
@@ -44,7 +50,7 @@ namespace BattleshipConsole
             return GetRandomNumberInRange(1, 2);
         }
 
-        private Position GetRandomGridPosition(Ship ship)
+        public Position GetRandomGridPosition(Ship ship)
         {
             Position randPosition = new Position();
             Point randPoint = new Point();
@@ -214,6 +220,22 @@ namespace BattleshipConsole
             PlaceShip(Board.Destroyer1);
             PlaceShip(Board.Destroyer2);
             PlaceShip(Board.Battleship);
+        }
+
+        internal Position GetRandomHitPosition(Board humanBoard)
+        {
+            Position randPosition = new Position();
+            Random rand = new Random();
+
+            int hitPositionIndex = rand.Next(HitPositions.Count);
+
+            string positionContents = HitPositions.ElementAt(hitPositionIndex);
+            HitPositions.RemoveAt(hitPositionIndex);
+
+            randPosition.Column = positionContents[0];
+            randPosition.Row = positionContents[1];
+
+            return randPosition;
         }
     }
 }
