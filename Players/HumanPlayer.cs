@@ -16,10 +16,10 @@ namespace BattleshipConsole
         struct FakeInput
         {
             public char Ori;
-            public char StartRow;
-            public char StarCol;
             public char EndRow;
             public char EndCol;
+            public char StarCol;
+            public char StartRow;
         }
 
         private void PlaceShip(Ship ship, FakeInput fakeInput)

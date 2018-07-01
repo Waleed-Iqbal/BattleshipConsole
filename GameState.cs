@@ -79,7 +79,9 @@ namespace BattleshipConsole
 
                 if (IsHumanTurn)
                 {
-                Console.Write($"{Environment.NewLine} {Human.Name}: ");
+                    // TODO: Should be handled in HumanPlayer class
+
+                    Console.Write($"{Environment.NewLine} {Human.Name}: ");
                     IsInputValid = false;
                     while (!IsInputValid)
                     {
@@ -182,6 +184,7 @@ namespace BattleshipConsole
                 }
                 else // Computer's turn
                 {
+                    // TODO: Should be handled in ComputerPlayer class
 
                 }
             }

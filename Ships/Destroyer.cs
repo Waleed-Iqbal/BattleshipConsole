@@ -11,10 +11,10 @@ namespace BattleshipConsole.Ships
         public Destroyer()
         {
             Size = 4;
-            Legend = Constants.LEGEND_DESTROYER;
-            PlacingString = Constants.PLACE_DESTROYER;
             LocationRows = new char[Size];
             LocationColumns = new char[Size];
+            Legend = Constants.LEGEND_DESTROYER;
+            PlacingString = Constants.PLACE_DESTROYER;
         }
     }
 }

@@ -15,20 +15,23 @@ namespace BattleshipConsole
     public class Player
     {
         public string Name { get; set; }
+
+        public int shipLocationCounter;
         public int NumberOfShipsDestroyed { get; set; }
-        public bool IsCurrentTurn { get; set; }
+
         public bool IsWinner { get; set; }
+        public bool IsCurrentTurn { get; set; }
+
         public Input Input;
         public Board Board;
-        public int shipLocationCounter;
 
         public Player()
         {
-            Board = new Board();
             Input.Row = ' ';
             Input.Column = ' ';
-            NumberOfShipsDestroyed = 0;
+            Board = new Board();
             shipLocationCounter = 0;
+            NumberOfShipsDestroyed = 0;
         }
     }
 }

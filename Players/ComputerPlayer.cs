@@ -140,6 +140,8 @@ namespace BattleshipConsole
 
         private void PlaceShip(Ship ship)
         {
+            // TODO: Should be handled more elegantly. This looks messy and repetitive
+
             ship.Orientation = GetRandomOrientation() == 1 ?
                 Ship.Orientations.Horizontal :
                 Ship.Orientations.Vertical;

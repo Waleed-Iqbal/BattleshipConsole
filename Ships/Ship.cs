@@ -24,8 +24,8 @@ namespace BattleshipConsole
         public bool IsDestroyed { get; set; }
         public Orientations Orientation { get; set; }
 
-        public Position StartPosition;
         public Position EndPosition;
+        public Position StartPosition;
 
         public string Legend { get; set; }
         public string PlacingString { get; set; }
