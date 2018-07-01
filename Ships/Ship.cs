@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattleshipConsole.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace BattleshipConsole
         public int Column;
     }
 
-    public class Ship
+    public class Ship : IShip
     {
         public int Size { get; set; }
         public bool IsDestroyed { get; set; }

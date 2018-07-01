@@ -1,4 +1,5 @@
-﻿using BattleshipConsole.Ships;
+﻿using BattleshipConsole.Interface;
+using BattleshipConsole.Ships;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BattleshipConsole
 {
-    public class Board
+    public class Board : IBoard
     {
         public string[,] Grid { get; set; }
 
@@ -17,7 +18,7 @@ namespace BattleshipConsole
         public readonly char[] ValidRows = { '+', '+', '+', '+', '+', '+', '+', '+', '+', '+' };
         public readonly char[] ValidColumns = { '+', '+', '+', '+', '+', '+', '+', '+', '+', '+' };
 
-        public int NumberOfShips { get; set; }
+        public short NumberOfShips { get; set; }
 
         public Destroyer Destroyer1 { get; set; }
         public Destroyer Destroyer2 { get; set; }

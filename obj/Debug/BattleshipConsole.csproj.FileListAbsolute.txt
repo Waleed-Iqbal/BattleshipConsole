@@ -1,7 +1,0 @@
-D:\Projects\BattleshipConsole\obj\Debug\BattleshipConsole.csprojAssemblyReference.cache
-D:\Projects\BattleshipConsole\obj\Debug\BattleshipConsole.csproj.CoreCompileInputs.cache
-D:\Projects\BattleshipConsole\bin\Debug\BattleshipConsole.exe.config
-D:\Projects\BattleshipConsole\bin\Debug\BattleshipConsole.exe
-D:\Projects\BattleshipConsole\bin\Debug\BattleshipConsole.pdb
-D:\Projects\BattleshipConsole\obj\Debug\BattleshipConsole.exe
-D:\Projects\BattleshipConsole\obj\Debug\BattleshipConsole.pdb

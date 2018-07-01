@@ -16,7 +16,7 @@ namespace BattleshipConsole
     {
         public string Name { get; set; }
 
-        public int shipLocationCounter;
+        public int shipLocationCounter { get; set; }
         public int NumberOfShipsDestroyed { get; set; }
 
         public bool IsWinner { get; set; }
