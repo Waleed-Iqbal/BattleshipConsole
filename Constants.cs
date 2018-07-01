@@ -14,6 +14,7 @@ namespace BattleshipConsole
         public const int NUMBER_OF_DESTROYERS = 2;
         public const int NUMBER_OF_BATTLESHIPS = 1;
 
+        public const char HIT_SPOT = 'x';
 
         public const string WON = "WON";
         public const string HUMAN_NAME = "You";
@@ -28,8 +29,8 @@ namespace BattleshipConsole
         public const string HIT_MISSED = "Hit Missed";
         public const string HORIZONTAL = "Horizontal";
         public const string ELIMINATED = "Eliminated";
-        public const string COMPUTER_NAME = "Opponent";
-        public const string COMPUTER_STRING = "OPPONENT";
+        public const string COMPUTER_NAME = "Computer";
+        public const string COMPUTER_STRING = "COMPUTER";
         public const string LEGEND_HIT_SUCCESSFUL = "HS";
         public const string DESTROYER_STRING = "Destroyer";
         public const string INVALID_INPUT = "Invalid input";
