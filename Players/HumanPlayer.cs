@@ -13,7 +13,7 @@ namespace BattleshipConsole
             Name = Constants.HUMAN_NAME;
         }
 
-        private void PlaceShip(Ship ship, char[] rows, char[] columns, string[,] grid)
+        private void PlaceShip(Ship ship)
         {
             bool isOrientationValid = false;
             while (!isOrientationValid)
@@ -39,7 +39,7 @@ namespace BattleshipConsole
                 ship.StartPosition.Column = Char.ToUpper(Console.ReadKey().KeyChar);
                 ship.StartPosition.Row = Console.ReadKey().KeyChar;
 
-                isStartPositionValid = ship.ValidateStartPosition(ship.StartPosition, rows, columns, grid);
+                isStartPositionValid = ship.ValidateStartPosition(ship.StartPosition, Board.Rows, Board.Columns, Board.Grid);
             }
 
             bool isEndPositionValid = false;
@@ -48,25 +48,25 @@ namespace BattleshipConsole
                 Console.Write($"{Environment.NewLine} Enter end location: ");
                 ship.EndPosition.Column = Char.ToUpper(Console.ReadKey().KeyChar);
                 ship.EndPosition.Row = Console.ReadKey().KeyChar;
-                isEndPositionValid = ship.ValidateEndPosition(ship.EndPosition, ship.StartPosition, ship.Size, rows, columns, grid);
+                isEndPositionValid = ship.ValidateEndPosition(ship.EndPosition, ship.StartPosition, ship.Size, Board.Rows, Board.Columns, Board.Grid);
             }
 
             if (isStartPositionValid && isEndPositionValid)
             {
-                Point startPoint = new Point() { Row = Array.IndexOf(rows, ship.StartPosition.Row), Column = Array.IndexOf(columns, ship.StartPosition.Column) };
-                Point endPoint = new Point() { Row = Array.IndexOf(rows, ship.EndPosition.Row), Column = Array.IndexOf(columns, ship.EndPosition.Column) };
+                Point startPoint = new Point() { Row = Array.IndexOf(Board.Rows, ship.StartPosition.Row), Column = Array.IndexOf(Board.Columns, ship.StartPosition.Column) };
+                Point endPoint = new Point() { Row = Array.IndexOf(Board.Rows, ship.EndPosition.Row), Column = Array.IndexOf(Board.Columns, ship.EndPosition.Column) };
 
                 if (ship.Orientation == Ship.Orientations.Vertical)
                 {
                     if (startPoint.Row - endPoint.Row < 0)
                     {
                         for (var i = startPoint.Row; i <= endPoint.Row; i++)
-                            grid[startPoint.Column, i] = ship.Legend;
+                            Board.Grid[startPoint.Column, i] = ship.Legend;
                     }
                     else
                     {
                         for (var i = endPoint.Row; i <= startPoint.Row; i++)
-                            grid[startPoint.Column, i] = ship.Legend;
+                            Board.Grid[startPoint.Column, i] = ship.Legend;
                     }
                 }
                 else
@@ -74,12 +74,12 @@ namespace BattleshipConsole
                     if (startPoint.Column - endPoint.Column < 0)
                     {
                         for (var i = startPoint.Column; i <= endPoint.Column; i++)
-                            grid[i, startPoint.Row] = ship.Legend;
+                            Board.Grid[i, startPoint.Row] = ship.Legend;
                     }
                     else
                     {
                         for (var i = endPoint.Column; i <= startPoint.Column; i++)
-                            grid[i, startPoint.Row] = ship.Legend;
+                            Board.Grid[i, startPoint.Row] = ship.Legend;
                     }
                 }
             }
@@ -88,11 +88,11 @@ namespace BattleshipConsole
 
         public void PlaceAllShips()
         {
-            PlaceShip(Board.Destroyer1, Board.Rows, Board.Columns, Board.Grid);
+            PlaceShip(Board.Destroyer1);
             Board.DisplayBoard();
-            PlaceShip(Board.Destroyer2, Board.Rows, Board.Columns, Board.Grid);
+            PlaceShip(Board.Destroyer2);
             Board.DisplayBoard();
-            PlaceShip(Board.Battleship, Board.Rows, Board.Columns, Board.Grid);
+            PlaceShip(Board.Battleship);
         }
     }
 }
